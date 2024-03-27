@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Info</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-faHjwIG9qIqNXDBB1i7uOTsFz2CzxlQKx8U4RqBE5P2QHh7W2vDcTwcu7jr7fxrA" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body class="custom-bg2">
+    <div class="container-fluid red-header text-light p-4 d-flex align-items-center justify-content-between sticky-top">
+        <h1 class="pokemon-info-title"><img src="logo.png" class="me-3" width="30" height="auto"> Pokemon Info</h1>
+        <div class="form-group">
+            <label for="pokemonName"></label>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="pokemonName" placeholder="e.g., Pikachu">
+                <div class="input-group-append">
+                    <button class="btn btn-dark" onclick="getPokemonData()">Get Pokemon!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="main-content">
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div id="pokemonInfo" class="mt-4">
+                    <div class="card border-secondary mb-3" style="width: 100%;">
+                        <div class="card-header"></div>
+                        <div class="card-text position-relative">
+                            <span id="pokemonIdLabel" class="position-absolute card-text2">No.</span>
+                            <span id="pokemonId" class="position-absolute"></span>
+                        </div>
+                        <img src="C:\Users\HomePC\Desktop\Pokemon API\question.jpg" class="card-img-top" alt="Default Pokemon Image">
+                        <div class="card-body">
+                            <p class="card-text"><strong class="card-text">Type:</strong> N/A</p>
+                            <p class="card-text"><strong class="card-text">Abilities:</strong> N/A</p>
+                            <p class="card-text"><strong class="card-text">Base stats:</strong><br>
+                                <span class="typing card-text">HP:</span> ???<br>
+                                <span class="typing card-text">ATK:</span> ???<br>
+                                <span class="typing card-text">SP ATK:</span> ???<br>
+                                <span class="typing card-text">DEF:</span> ???<br>
+                                <span class="typing card-text">SP DEF:</span> ???<br>
+                                <span class="typing card-text">SPD:</span> ???
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-8">
+                <div id="pokemonMoves" class="mt-4">
+                    <div class="card border-secondary mb-3" style="width: 100%;">
+                        <div class="card-header card-text3">
+                            Pokemon Moves
+                            <div class="form-inline float-right">
+                                <select id="moveMethodFilter" class="form-control" onchange="filterMovesByMethod()">
+                                    <option value="">All</option>
+                                    <option value="level-up">Level Up</option>
+                                    <option value="machine">Machine</option>
+                                    <option value="tutor">Tutor</option>
+                                    <option value="egg">Egg</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Level Learned</th>
+                                        <th>Move</th>
+                                        <th>Learn Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="movesTableBody">
+            
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fuid mt-5 overflow-hidden">
+        <div class="row">
+          <div class="col-lg-4 p-4">
+           <h3 class="h-font fw-bold fs-3 mb-2">
+            About Pokemon Info
+           </h3> 
+           <p>
+            The Pokemon Info page is a fan website that offers detailed information about Pokemons. People can quickly explore details like Pokemon types, abilities, base stats, and moves. For educational purposes only, neither the creator nor the school gained a profit from it.
+            </p>
+          </div>
+          <div class="col-lg-4 p-4">
+          </div>
+          <div class="col-lg-4 p-4">
+            <h5 class="mb-3">
+              Follow Us</h5>
+              <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+                <i class="bi bi-twitter me-1"></i>  Twitter
+              </a><br>
+              <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+                <i class="bi bi-facebook me-1"></i>  Facebook
+              </a><br>
+              <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+                <i class="bi bi-discord me-1"></i>  Discord
+              </a><br>
+              <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+                <i class="bi bi-reddit me-1"></i>  Reddit
+              </a><br>
+          </div>
+        </div>
+
+        <h6 class="text-center bg-dark text-white p-3 m-0">© Pokemon 2023</h6> 
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="pokemon.js"></script>
+</body>
+
+</html>
